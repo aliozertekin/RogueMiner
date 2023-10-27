@@ -9,7 +9,7 @@ int main() {
     Game::InitGame();
     Player player = Game::GetPlayer();
     
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(144);
 
     while (window.isOpen()) {
         Event event;

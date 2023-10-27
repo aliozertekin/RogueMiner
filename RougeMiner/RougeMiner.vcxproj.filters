@@ -43,5 +43,8 @@
     <Image Include="Assets\Player.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Assets\Player1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

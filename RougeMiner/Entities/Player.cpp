@@ -25,31 +25,70 @@ void Player::draw(sf::RenderWindow& window)
 	window.draw(playerSprite);
 }
 
-void Player::playerAnimation()
+void Player::playerAnimation(sf::Time deltaTime)
 {
 	
 	switch (playerState) {
 		case playerStates::Idle: {
-			if (playerFrame > 1) { playerFrame = 0; }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
-			
+			switch (playerDirection)
+			{
+				case playerDirections::Down:{
+					playerFrame = 0;
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 0 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+				case playerDirections::Left: {
+					playerFrame = 0;
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 1 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+				case playerDirections::Right: {
+					playerFrame = 0;
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 2 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+				case playerDirections::Up: {
+					playerFrame = 0;
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 3 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+			}
 			break;
 		}
 		case playerStates::Running: {
-			if (playerFrame > 7) { playerFrame = 0; }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 3 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
 			
-			break;
-		}
-		case playerStates::Mining: {
-			if (playerFrame > 7) { playerFrame = 0; }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 8 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
-
+			switch (playerDirection)
+			{
+			
+				case playerDirections::Down: {
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart(); }
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 0 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+				case playerDirections::Left: {
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart();}
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 1 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+				case playerDirections::Right: {
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart();}
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 2 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+				case playerDirections::Up: {
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart();}
+					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 3 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+					break;
+				}
+			}
 			break;
 		}
 	}
-	playerFrame++;
+	spriteTime = spriteClock.getElapsedTime();
+	playerFrame = floor(spriteTime.asSeconds() * shownFPS);
+		
 }
+
 
 void Player::keyPressed(sf::Time deltaTime) {
 
@@ -60,16 +99,19 @@ void Player::keyPressed(sf::Time deltaTime) {
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		xSpeed = -movementSpeed * deltaTime.asSeconds();
-		playerSprite.setScale(-1.0f, 1.0f);
+		playerDirection = 1;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		ySpeed = movementSpeed * deltaTime.asSeconds();
+		playerDirection = 0;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		xSpeed = movementSpeed * deltaTime.asSeconds();
-		playerSprite.setScale(1.0f, 1.0f);
+		playerDirection = 2;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		ySpeed = -movementSpeed * deltaTime.asSeconds();
+		playerDirection = 3;
 	}
 }
+

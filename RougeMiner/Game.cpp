@@ -17,7 +17,9 @@ void Game::Tick() {
 }
 
 void Game::Draw(sf::RenderWindow& window) {
-	player.playerAnimation();
+	
+	player.playerAnimation(deltaTime);
+
 	player.draw(window);
 }
 
