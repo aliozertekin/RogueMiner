@@ -13,8 +13,7 @@ public:
 	void draw(sf::RenderWindow&);
 	void playerAnimation();
 
-	void keyPressed();
-
+	void keyPressed(sf::Time deltaTime);
 
 	enum playerStates {
 		Idle,
@@ -22,8 +21,6 @@ public:
 		Mining
 	};
 private:
-
-
 	int playerFrame = 0;
 	sf::Texture playerSheet;
 	sf::Sprite playerSprite;
@@ -32,6 +29,6 @@ private:
 
 	float xSpeed = 0.0f;
 	float ySpeed = 0.0f;
-	float movementSpeed = 0.8f;
+	float movementSpeed = 50.0f;
 	float friction = 0.96f;
 };

@@ -6,10 +6,13 @@
 class Game {
 public:
 	static void InitGame();
+	static void Tick();
+	static void Draw(sf::RenderWindow&);
 
 	static Player GetPlayer();
 
-	static sf::Clock DeltaTime;
+	static sf::Time deltaTime;
 private:
 	static Player player;
+	static sf::Clock DeltaClock;
 };

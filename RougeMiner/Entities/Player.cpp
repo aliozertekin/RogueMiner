@@ -12,9 +12,7 @@ void Player::SetTexture(sf::Texture texture)
 {
 	playerSheet = texture;
 	playerSprite.setTexture(playerSheet);
-
 }
-
 
 void Player::draw(sf::RenderWindow& window)
 {
@@ -53,7 +51,7 @@ void Player::playerAnimation()
 	playerFrame++;
 }
 
-void Player::keyPressed() {
+void Player::keyPressed(sf::Time deltaTime) {
 
 	//TO-DO BETTER ANIMATION SYSTEM...
 	
@@ -61,17 +59,17 @@ void Player::keyPressed() {
 	if (abs(xSpeed) < 0.15f && abs(ySpeed) < 0.15f) { playerState = 0; }
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		xSpeed = -movementSpeed;
+		xSpeed = -movementSpeed * deltaTime.asSeconds();
 		playerSprite.setScale(-1.0f, 1.0f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		ySpeed = movementSpeed;
+		ySpeed = movementSpeed * deltaTime.asSeconds();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		xSpeed = movementSpeed;
+		xSpeed = movementSpeed * deltaTime.asSeconds();
 		playerSprite.setScale(1.0f, 1.0f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		ySpeed = -movementSpeed;
+		ySpeed = -movementSpeed * deltaTime.asSeconds();
 	}
 }
