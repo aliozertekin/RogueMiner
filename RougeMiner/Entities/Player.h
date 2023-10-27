@@ -13,13 +13,24 @@ public:
 	void draw(sf::RenderWindow&);
 	void playerAnimation();
 
+	void keyPressed();
+
+
 	enum playerStates {
 		Idle,
 		Running
 	};
 private:
+
+
 	int playerFrame = 0;
 	sf::Texture playerSheet;
 	sf::Sprite playerSprite;
-	int playerState = 1;
+	int playerState = 0;
+
+
+	float xSpeed = 0.0f;
+	float ySpeed = 0.0f;
+	float movementSpeed = 0.8f;
+	float friction = 0.96f;
 };

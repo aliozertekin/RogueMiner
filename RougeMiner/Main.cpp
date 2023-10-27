@@ -9,17 +9,18 @@ int main() {
     Player player = Game::GetPlayer();
     
     window.setFramerateLimit(60);
-    
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed)
                 window.close();
         }
-        
-        window.clear();
+        player.keyPressed();
+
+        window.clear(sf::Color::White);
 
         player.playerAnimation();
+        
         player.draw(window);
 
         window.display();
