@@ -1,12 +1,11 @@
 #include "Player.h"
+#include <math.h>
 
 Player::Player() {
+	sf::Vector2f pos = sf::Vector2f(0, 0);
 
-	sf::Vector2f size = sf::Vector2f(SPRITE_WIDTH, SPRITE_HEIGHT);
-	sf::Vector2f pos = sf::Vector2f(50, 50);
-
-	playerSprite.setOrigin(16, 16);
-	playerSprite.setPosition(pos.x - size.x / 2, pos.y - size.y / 2);
+	playerSprite.setOrigin(SPRITE_WIDTH / 2, SPRITE_HEIGHT / 2);
+	playerSprite.setPosition(pos.x, pos.y);
 }
 
 void Player::SetTexture(sf::Texture texture)
@@ -44,17 +43,22 @@ void Player::playerAnimation()
 			
 			break;
 		}
+		case playerStates::Mining: {
+			if (playerFrame > 7) { playerFrame = 0; }
+			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 8 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
+
+			break;
+		}
 	}
 	playerFrame++;
 }
 
 void Player::keyPressed() {
-	//SETSCALE DÜZGÜN ÇALIÞMIYOR MUHTEMELEN TÝLEMAPTE BÝ PROBLEM VAR...
 
-	//HALLETTÝM..
-	if(xSpeed > 0 || ySpeed > 0){ playerState = 1; }
-	else if (xSpeed == 0 && ySpeed == 0) { playerState = 0; }
-
+	//TO-DO BETTER ANIMATION SYSTEM...
+	
+	if (abs(xSpeed) > 0 || abs(ySpeed) > 0 ) { playerState = 1; }
+	if (abs(xSpeed) < 0.15f && abs(ySpeed) < 0.15f) { playerState = 0; }
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		xSpeed = -movementSpeed;
@@ -71,7 +75,3 @@ void Player::keyPressed() {
 		ySpeed = -movementSpeed;
 	}
 }
-
-
-
-

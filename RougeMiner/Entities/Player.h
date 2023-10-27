@@ -18,7 +18,8 @@ public:
 
 	enum playerStates {
 		Idle,
-		Running
+		Running,
+		Mining
 	};
 private:
 
@@ -27,7 +28,7 @@ private:
 	sf::Texture playerSheet;
 	sf::Sprite playerSprite;
 	int playerState = 0;
-
+	bool checkIdle = true;
 
 	float xSpeed = 0.0f;
 	float ySpeed = 0.0f;
