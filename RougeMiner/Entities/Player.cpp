@@ -27,17 +27,11 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::playerAnimation()
 {
-	
 	switch (playerState) {
 		case playerStates::Idle: {
-<<<<<<< Updated upstream
-			if (playerFrame > 1) { playerFrame = 0; }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
-			
-=======
 			switch (playerDirection)
 			{
-				case playerDirections::Down:{
+				case playerDirections::Down: {
 					playerFrame = 0;
 					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
 					break;
@@ -58,83 +52,56 @@ void Player::playerAnimation()
 					break;
 				}
 			}
->>>>>>> Stashed changes
 			break;
 		}
 		case playerStates::Running: {
-			if (playerFrame > 7) { playerFrame = 0; }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 3 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
-			
-<<<<<<< Updated upstream
-			break;
-		}
-		case playerStates::Mining: {
-			if (playerFrame > 7) { playerFrame = 0; }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, 8 * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
-
-=======
 			switch (playerDirection)
 			{
-			
 				case playerDirections::Down: {
 					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart(); }
 					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
 					break;
 				}
 				case playerDirections::Left: {
-					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart();}
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart(); }
 					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
 					break;
 				}
 				case playerDirections::Right: {
-					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart();}
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart(); }
 					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
 					break;
 				}
 				case playerDirections::Up: {
-					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart();}
+					if (playerFrame > 3) { playerFrame = 0; spriteClock.restart(); }
 					playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
 					break;
 				}
 			}
->>>>>>> Stashed changes
 			break;
 		}
 	}
-	playerFrame++;
+	spriteTime = spriteClock.getElapsedTime();
+	playerFrame = floor(spriteTime.asSeconds() * shownFPS);
 }
+
 
 void Player::keyPressed(sf::Time deltaTime) {
 
-	//TO-DO BETTER ANIMATION SYSTEM...
 	if (playerSpeed.x + playerSpeed.y > 0.9f) { playerSpeed.x * 0.7f; playerSpeed.y * 0.7f; }
 	
 	if (abs(playerSpeed.x) > 0 || abs(playerSpeed.y) > 0 ) { playerState = 1; }
-	if (abs(playerSpeed.x) < 0.15f && abs(playerSpeed.y) < 0.15f) { playerState = 0; }
+	if (abs(playerSpeed.x) < 0.2f && abs(playerSpeed.y) < 0.2f) { playerState = 0; }
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-<<<<<<< Updated upstream
-		xSpeed = -movementSpeed * deltaTime.asSeconds();
-		playerSprite.setScale(-1.0f, 1.0f);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		ySpeed = movementSpeed * deltaTime.asSeconds();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		xSpeed = movementSpeed * deltaTime.asSeconds();
-		playerSprite.setScale(1.0f, 1.0f);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		ySpeed = -movementSpeed * deltaTime.asSeconds();
-	}
-}
-=======
-		playerSpeed.x = -movementSpeed * deltaTime.asSeconds();
-		playerDirection = 1;
-	}
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		playerSpeed.y = movementSpeed * deltaTime.asSeconds();
 		playerDirection = 0;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		playerSpeed.x = -movementSpeed * deltaTime.asSeconds();
+		playerDirection = 1;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		playerSpeed.x = movementSpeed * deltaTime.asSeconds();
@@ -151,4 +118,4 @@ sf::Vector2f Player::getPlayerPos()
 	return playerSprite.getPosition();
 }
 
->>>>>>> Stashed changes
+

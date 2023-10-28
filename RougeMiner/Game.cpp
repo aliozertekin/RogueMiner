@@ -19,14 +19,8 @@ void Game::Tick() {
 }
 
 void Game::Draw(sf::RenderWindow& window) {
-<<<<<<< Updated upstream
+
 	player.playerAnimation();
-=======
-	player.playerAnimation(deltaTime);
-
-
-	
->>>>>>> Stashed changes
 	player.draw(window);
 	
 	Hud::drawHud(window , player.getPlayerPos());

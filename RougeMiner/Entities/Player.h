@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-constexpr auto SPRITE_WIDTH = 32;
-constexpr auto SPRITE_HEIGHT = 32;
+constexpr auto SPRITE_WIDTH = 48;
+constexpr auto SPRITE_HEIGHT = 48;
 
 class Player {
 
@@ -17,8 +17,13 @@ public:
 
 	enum playerStates {
 		Idle,
-		Running,
-		Mining
+		Running
+	};
+	enum playerDirections {
+		Down,
+		Left,
+		Right,
+		Up
 	};
 	sf::Vector2f getPlayerPos();
 private:
@@ -26,16 +31,14 @@ private:
 	sf::Texture playerSheet;
 	sf::Sprite playerSprite;
 	int playerState = 0;
-	bool checkIdle = true;
-<<<<<<< Updated upstream
-
-=======
+	int playerDirection = 0;
+	int shownFPS = 8;
 	sf::Clock spriteClock;
 	sf::Time spriteTime;
 	sf::Vector2f playerSpeed = sf::Vector2f(xSpeed,ySpeed);
->>>>>>> Stashed changes
+
 	float xSpeed = 0.0f;
 	float ySpeed = 0.0f;
 	float movementSpeed =80.0f;
-	float friction = 0.96f;
+	float friction = 0.90f;
 };
