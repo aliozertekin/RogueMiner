@@ -20,7 +20,10 @@ public:
 		Running
 	};
 	enum playerDirections {
-		Down,Left,Right,Up	
+		Down,
+		Left,
+		Right,
+		Up
 	};
 	sf::Vector2f getPlayerPos();
 private:

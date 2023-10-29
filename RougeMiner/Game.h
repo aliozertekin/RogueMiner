@@ -15,8 +15,6 @@ public:
 	static void InitGame();
 	static void Tick();
 	static void Draw(sf::RenderWindow&);
-	static void Zoom(sf::Event& event);
-	static void eventCalls(sf::Event& event);
 	static Player GetPlayer();
 	static sf::Time deltaTime;
 private:

@@ -22,8 +22,8 @@ void Game::Tick() {
 }
 
 void Game::Draw(sf::RenderWindow& window) {
+
 	player.playerAnimation();
-	gameView.setCenter(player.getPlayerPos());
 	player.draw(window);
 	
 	#if DEBUG
@@ -41,38 +41,12 @@ void Game::Draw(sf::RenderWindow& window) {
 		}
 	#endif
 
-	
 	Hud::drawHud(window , player.getPlayerPos());
-	InitView(window);
-}
-
-void Game::Zoom(sf::Event& event)
-{
-	int zoomConstant = 8;
-	int zoomSpeed = event.mouseWheel.delta * zoomConstant;
-	//FIX THIS
-	if (event.type == sf::Event::MouseWheelMoved)
-	{
-		std::cout << "wheel movement: " << event.mouseWheel.delta << std::endl;
-		if (gameView.getSize().x < WINDOW_WIDTH - zoomConstant && gameView.getSize().y < WINDOW_HEIGHT - zoomConstant)
-		{
-			gameView.setSize(gameView.getSize().x + zoomSpeed, gameView.getSize().y + zoomSpeed);
-			std::cout << "gameview size: " << gameView.getSize().x << std::endl;
-		}
-
-
-		
-		Hud::InitHudView(gameView.getSize().x, gameView.getSize().y);
-	}
-}
-
-void Game::eventCalls(sf::Event& event)
-{
-	Zoom(event);
 }
 
 void Game::InitView(sf::RenderWindow& window)
-{	
+{
+	gameView.setCenter(player.getPlayerPos());
 	window.setView(gameView);
 }
 
