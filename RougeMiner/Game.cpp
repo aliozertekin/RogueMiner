@@ -5,24 +5,29 @@
 Player Game::player;
 sf::Clock Game::DeltaClock;
 sf::Time Game::deltaTime;
+sf::View Game::gameView;
 
 void Game::InitGame()
 {
 	TextureManager::LoadTextures();
 	player.SetTexture(TextureManager::playerTexture);
+	Camera::setViews(&gameView, Hud::getView());
 	ChunkManager::InitChunks();
 	gameView.setSize(static_cast<float>(WINDOW_WIDTH / 2), static_cast<float>(WINDOW_HEIGHT / 2));
-	Hud::InitHudView(gameView.getSize().x, gameView.getSize().y);
+	Hud::Init(gameView.getSize().x, gameView.getSize().y);
+}
+
+void Game::EventHandler(sf::Event& event) {
+	Camera::keyPressed(event, Game::deltaTime);
 }
 
 void Game::Tick() {
 	player.keyPressed(Game::deltaTime);
-
-	deltaTime = DeltaClock.restart();
+	Camera::Tick();
 }
 
 void Game::Draw(sf::RenderWindow& window) {
-
+	DrawView(window);
 	player.playerAnimation();
 	player.draw(window);
 	
@@ -41,12 +46,13 @@ void Game::Draw(sf::RenderWindow& window) {
 		}
 	#endif
 
-	Hud::drawHud(window , player.getPlayerPos());
+	Hud::Draw(window, player.getPos());
+	deltaTime = DeltaClock.restart();
 }
 
-void Game::InitView(sf::RenderWindow& window)
+void Game::DrawView(sf::RenderWindow& window)
 {
-	gameView.setCenter(player.getPlayerPos());
+	gameView.setCenter(player.getPos());
 	window.setView(gameView);
 }
 

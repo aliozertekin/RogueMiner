@@ -113,7 +113,7 @@ void Player::keyPressed(sf::Time deltaTime) {
 	}
 }
 
-sf::Vector2f Player::getPlayerPos()
+sf::Vector2f Player::getPos()
 {
 	return playerSprite.getPosition();
 }

@@ -1,17 +1,18 @@
 #include "Hud.h"
 
-Hud::Hud()
-{
-}
+sf::View Hud::hudView;
 
-void Hud::drawHud(sf::RenderWindow& window, sf::Vector2f playerpos)
+void Hud::Draw(sf::RenderWindow& window, sf::Vector2f playerpos)
 {
-	hudView.setCenter(playerpos);
-	window.setView(hudView);
 	
 }
 
-void Hud::InitHudView(float gamewindow_W, float gamewindow_H)
+sf::View* Hud::getView()
 {
-	hudView.setSize(gamewindow_W, gamewindow_H);
+	return &hudView;
+}
+
+void Hud::Init(float windowW, float windowH)
+{
+	hudView.setSize(windowW, windowH);
 }
