@@ -16,8 +16,8 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed)
                 window.close();
+            Game::eventCalls(event);
         }
-
         Game::Tick();
         window.clear(sf::Color::White);
         Game::Draw(window);

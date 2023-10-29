@@ -9,10 +9,11 @@ public:
 	static void drawHud(sf::RenderWindow&, sf::Vector2f playerpos);
 	static void InitHudView(float gamewindow_W, float gamewindow_H);
 private:
-	
-	
+	sf::Text text;
+	sf::Font font;
 
+	sf::Vector2f hudCenter = hudView.getCenter();
+	sf::Vector2f hudSize = hudView.getSize();
 
-	
 
 };
