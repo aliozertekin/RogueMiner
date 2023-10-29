@@ -25,7 +25,7 @@ public:
 		Right,
 		Up
 	};
-	sf::Vector2f getPlayerPos();
+	sf::Vector2f getPos();
 private:
 	int playerFrame = 0;
 	sf::Texture playerSheet;

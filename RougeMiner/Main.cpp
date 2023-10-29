@@ -16,6 +16,8 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed)
                 window.close();
+
+            Game::EventHandler(event);
         }
 
         Game::Tick();

@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ChunkManager.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -137,8 +138,10 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Types\Chunk.cpp" />
     <ClCompile Include="Types\Tile.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="ChunkManager.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Types\Tile.h" />
     <ClInclude Include="Types\Chunk.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Player.png" />
