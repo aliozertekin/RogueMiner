@@ -12,17 +12,18 @@ void ChunkManager::InitChunks() {
 
 void ChunkManager::GenerateChunk(int xPos, int yPos)
 {
-	Chunk chunk(xPos, yPos);
+	auto chunk = std::make_shared<Chunk>(xPos, yPos);
 
-	for (int x = 0; x < 16; x++) {
-		for (int y = 0; y < 16; y++) {
-			Tile tile(0, x, y, &chunk);
-			chunk.setTileAt(x, y, tile);
-		}
-	}
+    for (int x = 0; x < 16; x++) {
+        for (int y = 0; y < 16; y++) {
+			auto tile = std::make_shared<Tile>(0, x, y, chunk.get());
+            chunk->setTileAt(x, y, *tile.get());
+        }
+    }
 
-	chunks[xPos][yPos] = chunk;
+    (*getChunks())[xPos][yPos] = *chunk;
 }
+
 
 Chunk* ChunkManager::getChunk(int x, int y)
 {
@@ -33,6 +34,29 @@ Chunk* ChunkManager::getChunk(int x, int y)
 		}
 	}
 	return nullptr;
+}
+
+Chunk* ChunkManager::getChunkWorld(float x, float y)
+{
+	int chunkX = floor(x / 512);
+	int chunkY = floor(y / 512);
+	return nullptr;
+}
+
+void ChunkManager::setTileAt(int x, int y, Tile tile)
+{
+	int chunkX = floor(x / 16);
+	int chunkY = floor(y / 16);
+	Chunk* chunk = getChunk(chunkX, chunkY);
+	chunk->setTileAt(x % 16, y % 16, tile);
+}
+
+Tile* ChunkManager::getTileAt(int x, int y)
+{
+	int chunkX = floor(x / 16);
+	int chunkY = floor(y / 16);
+	Chunk* chunk = getChunk(chunkX, chunkY);
+	return chunk->getTileAt(x % 16, y % 16);
 }
 
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()

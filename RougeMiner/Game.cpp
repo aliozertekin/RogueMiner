@@ -31,20 +31,21 @@ void Game::Draw(sf::RenderWindow& window) {
 	player.playerAnimation();
 	player.draw(window);
 	
-	#if DEBUG
-		std::unordered_map<int, std::unordered_map<int, Chunk>>* chunks = ChunkManager::getChunks();
+	std::unordered_map<int, std::unordered_map<int, Chunk>>* chunks = ChunkManager::getChunks();
 
-		for (auto& xPair : *chunks) {
-			int xPos = xPair.first; // X coordinate
+	for (auto& xPair : *chunks) {
+		int xPos = xPair.first; // X coordinate
 
-			auto& yMap = xPair.second;
-			for (auto& yPair : yMap) {
-				int yPos = yPair.first; // Y coordinate
-				Chunk& chunk = yPair.second; // Chunk
-				chunk.DebugDraw(window);
-			}
+		auto& yMap = xPair.second;
+		for (auto& yPair : yMap) {
+			int yPos = yPair.first; // Y coordinate
+			Chunk& chunk = yPair.second; // Chunk
+			chunk.Draw(window);
+			#ifdef DEBUG 
+			chunk.DebugDraw(window);
+			#endif
 		}
-	#endif
+	}
 
 	Hud::Draw(window, player.getPos());
 	deltaTime = DeltaClock.restart();

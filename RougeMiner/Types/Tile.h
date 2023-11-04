@@ -7,9 +7,12 @@ class Tile {
 public:
 	Tile();
 	Tile(int type, int x, int y, Chunk* chunk);
+	
+	void Draw(sf::RenderWindow&);
 private:
 	int type;
 	Chunk* chunk;
-	int posX;
-	int posY;
+	int chunkX;
+	int chunkY;
+	sf::RectangleShape shape;
 };
