@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Types/Chunk.h"
 #include "Types\Tile.h"
+#include "Entities/Player.h"
 #include <unordered_map>
 
 class ChunkManager {
@@ -18,6 +19,8 @@ public:
 	static void setTileAt(int x, int y, Tile tile);
 	// Gets a tile at given position. Finds the chunk automatically
 	static Tile* getTileAt(int x, int y);
+
+
 
 	static std::unordered_map<int, std::unordered_map<int, Chunk>>* getChunks();
 private:

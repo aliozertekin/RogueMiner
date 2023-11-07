@@ -1,11 +1,49 @@
 #include "Player.h"
 #include <math.h>
+#include <iostream>
 
 Player::Player() {
-	sf::Vector2f pos = sf::Vector2f(0, 0);
-
 	playerSprite.setOrigin(SPRITE_WIDTH / 2, SPRITE_HEIGHT / 2);
-	playerSprite.setPosition(pos.x, pos.y);
+	playerSprite.setPosition(0,0);
+}
+
+Tile* Player::tileLookedAt(sf::RenderWindow& window)
+{
+	sf::Vector2f playerPos = playerSprite.getPosition();
+	Chunk* chunk = ChunkManager::getChunkWorld(floor(playerPos.x),floor(playerPos.y));
+	if (chunk != nullptr)
+		chunk->DebugDraw(window);
+	sf::Vector2f tilePos = sf::Vector2f(floor(playerPos.x / 32.0f), floor(playerPos.y / 32.0f));
+	
+	switch (playerDirection){
+		case playerDirections::Down:{
+			Tile* playertile = ChunkManager::getTileAt(tilePos.x, tilePos.y + 1);
+			playertile->Draw(window);
+			break;
+		}
+		case playerDirections::Left:{
+			Tile* playertile = ChunkManager::getTileAt(tilePos.x - 1, tilePos.y);
+			playertile->Draw(window);
+			break;
+		}
+		case playerDirections::Right:{
+			Tile* playertile = ChunkManager::getTileAt(tilePos.x + 1, tilePos.y);
+			playertile->Draw(window);
+			break;
+		}
+		case playerDirections::Up:{
+			Tile* playertile = ChunkManager::getTileAt(tilePos.x, tilePos.y - 1);
+			playertile->Draw(window);
+			break;
+		}
+		default:{
+			Tile* playertile = ChunkManager::getTileAt(tilePos.x, tilePos.y);
+			playertile->Draw(window);
+			break; 
+		}
+	}
+	
+	return NULL;
 }
 
 void Player::SetTexture(sf::Texture texture)
@@ -84,6 +122,8 @@ void Player::playerAnimation()
 	spriteTime = spriteClock.getElapsedTime();
 	playerFrame = floor(spriteTime.asSeconds() * shownFPS);
 }
+
+
 
 
 void Player::keyPressed(sf::Time deltaTime) {

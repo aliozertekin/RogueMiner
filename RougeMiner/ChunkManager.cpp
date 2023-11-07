@@ -1,5 +1,5 @@
 #include "ChunkManager.h"
-
+#include <iostream>
 std::unordered_map<int, std::unordered_map<int, Chunk>> ChunkManager::chunks;
 
 //TO-DO Randomly generated world
@@ -8,6 +8,9 @@ void ChunkManager::InitChunks() {
 	GenerateChunk(-1, 0);
 	GenerateChunk(0, -1);
 	GenerateChunk(0, 0);
+	GenerateChunk(-2, -2);
+	GenerateChunk(-2, -1);
+	GenerateChunk(-1, -2);
 }
 
 void ChunkManager::GenerateChunk(int xPos, int yPos)
@@ -40,24 +43,26 @@ Chunk* ChunkManager::getChunkWorld(float x, float y)
 {
 	int chunkX = floor(x / 512);
 	int chunkY = floor(y / 512);
-	return nullptr;
+	return getChunk(chunkX, chunkY);
 }
 
 void ChunkManager::setTileAt(int x, int y, Tile tile)
 {
-	int chunkX = floor(x / 16);
-	int chunkY = floor(y / 16);
+	int chunkX = floor(static_cast<float>(x) / 16);
+	int chunkY = floor(static_cast<float>(y) / 16);
 	Chunk* chunk = getChunk(chunkX, chunkY);
 	chunk->setTileAt(x % 16, y % 16, tile);
 }
 
 Tile* ChunkManager::getTileAt(int x, int y)
 {
-	int chunkX = floor(x / 16);
-	int chunkY = floor(y / 16);
+	int chunkX = floor(static_cast<float>(x) / 16);
+	int chunkY = floor(static_cast<float>(y) / 16);
 	Chunk* chunk = getChunk(chunkX, chunkY);
 	return chunk->getTileAt(x % 16, y % 16);
 }
+
+
 
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()
 {

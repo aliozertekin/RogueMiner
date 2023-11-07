@@ -16,7 +16,7 @@ Tile::Tile(int type, int x, int y, Chunk* chunk)
 	shape.setPosition(worldPos);
 	shape.setSize(sf::Vector2f(32.0, 32.0));
 	shape.setFillColor(sf::Color::Transparent);
-	shape.setOutlineThickness(2.0);
+	shape.setOutlineThickness(1.0f);
 	shape.setOutlineColor(sf::Color::Green);
 }
 
