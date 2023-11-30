@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../ChunkManager.h"
 
 constexpr auto SPRITE_WIDTH = 48;
 constexpr auto SPRITE_HEIGHT = 48;
@@ -8,7 +9,7 @@ class Player {
 
 public:
 	Player();
-
+	Tile* tileLookedAt(sf::RenderWindow& window);
 	void SetTexture(sf::Texture texture);
 	void draw(sf::RenderWindow&);
 	void playerAnimation();
@@ -39,6 +40,6 @@ private:
 
 	float xSpeed = 0.0f;
 	float ySpeed = 0.0f;
-	float movementSpeed =80.0f;
+	float movementSpeed = 80.0f;
 	float friction = 0.90f;
 };

@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Types/Chunk.h"
 #include "Types\Tile.h"
+#include "Entities/Player.h"
 #include <unordered_map>
 
 class ChunkManager {

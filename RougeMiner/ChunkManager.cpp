@@ -10,6 +10,9 @@ void ChunkManager::InitChunks() {
 	GenerateChunk(-1, 0);
 	GenerateChunk(0, -1);
 	GenerateChunk(0, 0);
+	GenerateChunk(-2, -2);
+	GenerateChunk(-2, -1);
+	GenerateChunk(-1, -2);
 }
 
 void ChunkManager::GenerateChunk(int xPos, int yPos)
@@ -66,6 +69,8 @@ void ChunkManager::setTileSheet(sf::Texture texture)
 {
 	tileSheet = texture;
 }
+
+
 
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()
 {
