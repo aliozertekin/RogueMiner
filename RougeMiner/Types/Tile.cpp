@@ -5,22 +5,31 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(int type, int x, int y, Chunk* chunk)
+Tile::Tile(TileBase* type, int x, int y, Chunk* chunk, sf::Texture* texture)
 {
 	this->chunk = chunk;
-	this->chunkX = x;
-	this->chunkY = y;
+	this->tileX = x;
+	this->tileY = y;
 	this->type = type;
 
 	sf::Vector2f worldPos = chunk->tileToWorldCoordinates(x, y);
-	shape.setPosition(worldPos);
-	shape.setSize(sf::Vector2f(32.0, 32.0));
-	shape.setFillColor(sf::Color::Transparent);
-	shape.setOutlineThickness(1.0f);
-	shape.setOutlineColor(sf::Color::Green);
+	sprite.setPosition(worldPos);
+	sprite.setTexture(*texture);
+	sprite.setTextureRect(type->textureRect);
 }
 
 void Tile::Draw(sf::RenderWindow& window)
 {
-	window.draw(shape);
+	//window.draw(sprite);
+	type->Draw(window, sprite);
+}
+
+sf::Vector2i Tile::GetPos()
+{
+	return sf::Vector2i(tileX, tileY);
+}
+
+void Tile::SetType(TileBase* tile)
+{
+	type = tile;
 }

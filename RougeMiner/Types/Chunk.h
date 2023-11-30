@@ -12,6 +12,7 @@ public:
 	// Gets the tile at given position
 	Tile* getTileAt(int x, int y);
 	// Sets the tile at given position
+	void setTileAt(int x, int y, TileBase* tile);
 	void setTileAt(int x, int y, Tile tile);
 	// Returns the world coordinates of a tile
 	sf::Vector2f tileToWorldCoordinates(int x, int y);

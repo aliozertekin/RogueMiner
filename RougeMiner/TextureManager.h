@@ -2,8 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-static class TextureManager {
+class TextureManager {
 public:
 	static void LoadTextures();
+
 	static sf::Texture playerTexture;
+	static sf::Texture tileTexture;
 };

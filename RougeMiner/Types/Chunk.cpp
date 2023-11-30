@@ -38,6 +38,13 @@ Tile* Chunk::getTileAt(int x, int y) {
     return &tiles[x][y];
 }
 
+void Chunk::setTileAt(int x, int y, TileBase* tile) {
+    if (x < 0) x += 16;
+    if (y < 0) y += 16;
+
+    tiles[x][y].SetType(tile);
+}
+
 void Chunk::setTileAt(int x, int y, Tile tile) {
     if (x < 0) x += 16;
     if (y < 0) y += 16;

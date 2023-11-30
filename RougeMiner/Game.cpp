@@ -12,6 +12,8 @@ void Game::InitGame()
 	TextureManager::LoadTextures();
 	player.SetTexture(TextureManager::playerTexture);
 	Camera::setViews(&gameView, Hud::getView());
+	TileManager::RegisterTiles();
+	ChunkManager::setTileSheet(TextureManager::tileTexture);
 	ChunkManager::InitChunks();
 	gameView.setSize(static_cast<float>(WINDOW_WIDTH / 2), static_cast<float>(WINDOW_HEIGHT / 2));
 	Hud::Init(gameView.getSize().x, gameView.getSize().y);

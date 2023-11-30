@@ -16,13 +16,13 @@ public:
 	// Gets a chunk from its world position
 	static Chunk* getChunkWorld(float x, float y);
 	// Sets a tile at given position. Finds the chunk automatically
-	static void setTileAt(int x, int y, Tile tile);
+	static void setTileAt(int x, int y, TileBase* tile);
 	// Gets a tile at given position. Finds the chunk automatically
 	static Tile* getTileAt(int x, int y);
-
-
-
 	static std::unordered_map<int, std::unordered_map<int, Chunk>>* getChunks();
+
+	static void setTileSheet(sf::Texture);
 private:
 	static std::unordered_map<int, std::unordered_map<int, Chunk>> chunks;
+	static sf::Texture tileSheet;
 };

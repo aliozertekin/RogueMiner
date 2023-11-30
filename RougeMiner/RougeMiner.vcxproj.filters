@@ -39,6 +39,18 @@
     <ClCompile Include="Types\Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tiles\TileBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -62,12 +74,33 @@
     <ClInclude Include="Types\Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\Stone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\TileBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\Cobblestone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\Air.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Player.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Assets\Player1.png">
+    <Image Include="Assets\tilesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
