@@ -5,6 +5,7 @@
 #include "GUI/Hud.h"
 #include "ChunkManager.h"
 #include "Camera.h"
+#include "TileManager.h"
 
 constexpr auto WINDOW_WIDTH = 800;
 constexpr auto WINDOW_HEIGHT = 600;

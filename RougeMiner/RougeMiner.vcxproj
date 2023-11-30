@@ -136,6 +136,8 @@
     <ClCompile Include="GUI\Hud.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TileManager.cpp" />
+    <ClCompile Include="Tiles\TileBase.cpp" />
     <ClCompile Include="Types\Chunk.cpp" />
     <ClCompile Include="Types\Tile.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -147,13 +149,18 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUI\Hud.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Tiles\Air.h" />
+    <ClInclude Include="Tiles\Cobblestone.h" />
+    <ClInclude Include="Tiles\Stone.h" />
+    <ClInclude Include="TileManager.h" />
+    <ClInclude Include="Tiles\TileBase.h" />
     <ClInclude Include="Types\Tile.h" />
     <ClInclude Include="Types\Chunk.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Player.png" />
-    <Image Include="Assets\Player1.png" />
+    <Image Include="Assets\tilesheet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

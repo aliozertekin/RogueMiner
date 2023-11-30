@@ -1,6 +1,8 @@
 #include "ChunkManager.h"
+#include "TileManager.h"
 
 std::unordered_map<int, std::unordered_map<int, Chunk>> ChunkManager::chunks;
+sf::Texture ChunkManager::tileSheet;
 
 //TO-DO Randomly generated world
 void ChunkManager::InitChunks() {
@@ -13,15 +15,16 @@ void ChunkManager::InitChunks() {
 void ChunkManager::GenerateChunk(int xPos, int yPos)
 {
 	auto chunk = std::make_shared<Chunk>(xPos, yPos);
+	TileBase* stone = TileManager::GetTile("RM_STONE");
 
-    for (int x = 0; x < 16; x++) {
-        for (int y = 0; y < 16; y++) {
-			auto tile = std::make_shared<Tile>(0, x, y, chunk.get());
-            chunk->setTileAt(x, y, *tile.get());
-        }
-    }
+	for (int x = 0; x < 16; x++) {
+		for (int y = 0; y < 16; y++) {
+			auto tile = std::make_shared<Tile>(stone, x, y, chunk.get(), &tileSheet);
+			chunk->setTileAt(x, y, *tile.get());
+		}
+	}
 
-    (*getChunks())[xPos][yPos] = *chunk;
+	(*getChunks())[xPos][yPos] = *chunk;
 }
 
 
@@ -38,25 +41,30 @@ Chunk* ChunkManager::getChunk(int x, int y)
 
 Chunk* ChunkManager::getChunkWorld(float x, float y)
 {
-	int chunkX = floor(x / 512);
-	int chunkY = floor(y / 512);
-	return nullptr;
+	int chunkX = static_cast<int>(floor(x / 512.0f));
+	int chunkY = static_cast<int>(floor(y / 512.0f));
+	return getChunk(chunkX, chunkY);
 }
 
-void ChunkManager::setTileAt(int x, int y, Tile tile)
+void ChunkManager::setTileAt(int x, int y, TileBase* tile)
 {
-	int chunkX = floor(x / 16);
-	int chunkY = floor(y / 16);
+	int chunkX = static_cast<int>(floor(static_cast<float>(x) / 16.0f));
+	int chunkY = static_cast<int>(floor(static_cast<float>(y) / 16.0f));
 	Chunk* chunk = getChunk(chunkX, chunkY);
 	chunk->setTileAt(x % 16, y % 16, tile);
 }
 
 Tile* ChunkManager::getTileAt(int x, int y)
 {
-	int chunkX = floor(x / 16);
-	int chunkY = floor(y / 16);
+	int chunkX = static_cast<int>(floor(static_cast<float>(x) / 16.0f));
+	int chunkY = static_cast<int>(floor(static_cast<float>(y) / 16.0f));
 	Chunk* chunk = getChunk(chunkX, chunkY);
-	return chunk->getTileAt(x % 16, y % 16);
+	return chunk->getTileAt( x % 16, y % 16);
+}
+
+void ChunkManager::setTileSheet(sf::Texture texture)
+{
+	tileSheet = texture;
 }
 
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()
