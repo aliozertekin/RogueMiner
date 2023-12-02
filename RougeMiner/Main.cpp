@@ -4,7 +4,7 @@
 using namespace sf;
 
 int main() {
-    RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "RougeMiner");
+    RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "RogueMiner");
     
     Game::InitGame();
     Player player = Game::GetPlayer();

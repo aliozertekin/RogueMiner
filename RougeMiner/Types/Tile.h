@@ -13,6 +13,8 @@ public:
 	void Draw(sf::RenderWindow&);
 	sf::Vector2i GetPos();
 	void SetType(TileBase* type);
+	sf::Sprite getSprite();
+	void setSprite();
 private:
 	TileBase* type;
 	Chunk* chunk;

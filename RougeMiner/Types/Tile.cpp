@@ -33,3 +33,8 @@ void Tile::SetType(TileBase* tile)
 {
 	type = tile;
 }
+
+sf::Sprite Tile::getSprite()
+{
+	return sprite;
+}

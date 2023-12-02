@@ -24,6 +24,7 @@
     <ProjectGuid>{6a9c2b5c-3272-42fb-8c5e-34a04017bfea}</ProjectGuid>
     <RootNamespace>RougeMiner</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RogueMiner</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -150,10 +151,13 @@
     <ClInclude Include="GUI\Hud.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tiles\Air.h" />
+    <ClInclude Include="Tiles\CoalOre.h" />
     <ClInclude Include="Tiles\Cobblestone.h" />
+    <ClInclude Include="Tiles\CopperOre.h" />
     <ClInclude Include="Tiles\Stone.h" />
     <ClInclude Include="TileManager.h" />
     <ClInclude Include="Tiles\TileBase.h" />
+    <ClInclude Include="Tiles\TinOre.h" />
     <ClInclude Include="Types\Tile.h" />
     <ClInclude Include="Types\Chunk.h" />
     <ClInclude Include="Utils.h" />

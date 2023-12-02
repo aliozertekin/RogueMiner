@@ -11,6 +11,7 @@ public:
 	std::string Description;
 	int flags;
 	int hardness;
+	int weight;
 
 	static enum FLAGS {
 		INVISIBLE = 1 << 0,

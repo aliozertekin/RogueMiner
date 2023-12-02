@@ -4,8 +4,11 @@
 std::unordered_map<int, std::unordered_map<int, Chunk>> ChunkManager::chunks;
 sf::Texture ChunkManager::tileSheet;
 
+
 //TO-DO Randomly generated world
 void ChunkManager::InitChunks() {
+
+	TileManager::RegisterOres();
 	GenerateChunk(-1, -1);
 	GenerateChunk(-1, 0);
 	GenerateChunk(0, -1);
@@ -17,13 +20,22 @@ void ChunkManager::InitChunks() {
 
 void ChunkManager::GenerateChunk(int xPos, int yPos)
 {
+	std::srand(static_cast<int>(yPos * 1e3 + xPos));
+	
 	auto chunk = std::make_shared<Chunk>(xPos, yPos);
-	TileBase* stone = TileManager::GetTile("RM_STONE");
-
 	for (int x = 0; x < 16; x++) {
 		for (int y = 0; y < 16; y++) {
-			auto tile = std::make_shared<Tile>(stone, x, y, chunk.get(), &tileSheet);
-			chunk->setTileAt(x, y, *tile.get());
+
+			int rand = (std::rand() * RAND_MAX + std::rand()) % 100;
+
+			if (rand < 90) {
+				chunk->setTileAt(x, y, *std::make_shared<Tile>(TileManager::GetTile("RM_STONE"), x, y, chunk.get(), &tileSheet));
+			}
+			else {
+				chunk->setTileAt(x, y, *std::make_shared<Tile>(TileManager::GetTile(TileManager::GetOreID(TileManager::GetOreVector())), x, y, chunk.get(), &tileSheet));
+			}
+				
+			
 		}
 	}
 
@@ -70,9 +82,10 @@ void ChunkManager::setTileSheet(sf::Texture texture)
 	tileSheet = texture;
 }
 
-
-
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()
 {
 	return &chunks;
 }
+
+
+

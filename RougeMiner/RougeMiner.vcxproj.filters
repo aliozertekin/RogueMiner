@@ -95,6 +95,15 @@
     <ClInclude Include="Tiles\Air.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tiles\TinOre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\CopperOre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\CoalOre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Player.png">

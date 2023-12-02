@@ -20,7 +20,6 @@ public:
 	// Gets a tile at given position. Finds the chunk automatically
 	static Tile* getTileAt(int x, int y);
 	static std::unordered_map<int, std::unordered_map<int, Chunk>>* getChunks();
-
 	static void setTileSheet(sf::Texture);
 private:
 	static std::unordered_map<int, std::unordered_map<int, Chunk>> chunks;
