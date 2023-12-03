@@ -34,6 +34,11 @@ void Tile::SetType(TileBase* tile)
 	type = tile;
 }
 
+TileBase* Tile::GetType()
+{
+	return type;
+}
+
 sf::Sprite Tile::getSprite()
 {
 	return sprite;

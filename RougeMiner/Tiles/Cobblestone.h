@@ -9,6 +9,5 @@ public:
         Name = "Cobblestone";
         Description = "A semi-hard stone.";
         hardness = 4;
-        weight = 0;
     }
 };

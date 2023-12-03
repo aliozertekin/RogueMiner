@@ -13,6 +13,7 @@ public:
 	void Draw(sf::RenderWindow&);
 	sf::Vector2i GetPos();
 	void SetType(TileBase* type);
+	TileBase* GetType();
 	sf::Sprite getSprite();
 	void setSprite();
 private:

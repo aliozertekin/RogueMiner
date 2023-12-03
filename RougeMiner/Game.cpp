@@ -9,6 +9,7 @@ sf::View Game::gameView;
 
 void Game::InitGame()
 {
+	Utils::SetSeed(31);
 	TextureManager::LoadTextures();
 	player.SetTexture(TextureManager::playerTexture);
 	Camera::setViews(&gameView, Hud::getView());
@@ -49,7 +50,7 @@ void Game::Draw(sf::RenderWindow& window) {
 		}
 	}
 
-	player.tileLookedAt(window);
+	player.TileLook(window);
 	player.draw(window);
 	
 

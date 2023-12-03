@@ -9,9 +9,8 @@ public:
 	std::string ID;
 	std::string Name;
 	std::string Description;
-	int flags;
+	int flags = 0;
 	int hardness;
-	int weight;
 
 	static enum FLAGS {
 		INVISIBLE = 1 << 0,

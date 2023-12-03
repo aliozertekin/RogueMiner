@@ -9,6 +9,5 @@ public:
         Name = "Stone";
         Description = "A hard stone.";
         hardness = 5;
-        weight = 0;
     }
 };

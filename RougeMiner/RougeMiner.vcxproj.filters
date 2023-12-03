@@ -51,6 +51,9 @@
     <ClCompile Include="Tiles\TileBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Types\OreDefinition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tiles\CoalOre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\OreDefinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

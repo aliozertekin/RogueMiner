@@ -17,6 +17,8 @@ void TileManager::RegisterTiles()
     RegisterTile(CopperOre().ID, CopperOre());
     RegisterTile(TinOre().ID, TinOre());
     RegisterTile(CoalOre().ID, CoalOre());
+
+    RegisterOres();
 }
 
 void TileManager::RegisterTile(std::string uniqueKey, TileBase base)
@@ -29,43 +31,18 @@ TileBase* TileManager::GetTile(std::string uniqueKey)
     return &tileRegistry[uniqueKey];
 }
 
-int TileManager::GetWeight(std::string uniqueKey)
-{
-    return tileRegistry[uniqueKey].weight;
-}
-
-std::vector<std::string> TileManager::AddOres(std::string uniqueKey, std::vector<std::string> vector)
-{
-    for (int i = 0; i < GetWeight(uniqueKey); ++i) 
-        vector.push_back(tileRegistry[uniqueKey].ID);
-    return vector;
-}
-
 void TileManager::RegisterOres()
 {
-    std::vector<std::string> Ores;
+    std::map<std::string, OreDefinition> oreRegistry;
 
-    Ores = AddOres("RM_TIN_ORE", Ores);
-    Ores = AddOres("RM_COPPER_ORE", Ores);
-    // Ores = AddOres("RM_COAL_ORE", Ores);
+    oreRegistry[CopperOre().ID] = OreDefinition(1.5);
+    oreRegistry[TinOre().ID] = OreDefinition(0.7);
+    oreRegistry[CoalOre().ID] = OreDefinition(1.0);
 
-
-    ores = Ores;
+    Utils::RegisterOres(oreRegistry);
 }
 
-std::string TileManager::GetOreID(std::vector<std::string> ores)
+TileBase* TileManager::GetRandomOre()
 {
-
-    int rand = static_cast<int>((std::rand() * RAND_MAX  + std::rand()) % ores.size());
-    if (rand <= 0) { rand = 1; }
-    else if (rand >= ores.size()) { rand = ores.size() - 1; }
-    //#ifdef DEBUG 
-        std::cout << ores[rand] << "  " << rand << std::endl;
-    //#endif
-    return ores[rand];
-   
-}
-
-std::vector<std::string> TileManager::GetOreVector() {
-    return ores;
+    return GetTile(Utils::GetRandomOre());
 }

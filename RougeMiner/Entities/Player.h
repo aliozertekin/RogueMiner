@@ -9,12 +9,13 @@ class Player {
 
 public:
 	Player();
-	Tile* tileLookedAt(sf::RenderWindow& window);
+	Tile* TileLook(sf::RenderWindow& window);
 	void SetTexture(sf::Texture texture);
 	void draw(sf::RenderWindow&);
 	void playerAnimation();
 
 	void keyPressed(sf::Time deltaTime);
+	sf::Vector2f getPos();
 
 	enum playerStates {
 		Idle,
@@ -26,7 +27,6 @@ public:
 		Right,
 		Up
 	};
-	sf::Vector2f getPos();
 private:
 	int playerFrame = 0;
 	sf::Texture playerSheet;
@@ -37,6 +37,7 @@ private:
 	sf::Clock spriteClock;
 	sf::Time spriteTime;
 	sf::Vector2f playerSpeed = sf::Vector2f(xSpeed,ySpeed);
+	Tile* targetTile;
 
 	float xSpeed = 0.0f;
 	float ySpeed = 0.0f;
