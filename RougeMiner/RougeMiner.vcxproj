@@ -134,6 +134,7 @@
     <ClCompile Include="ChunkManager.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GUI\HealthBar.cpp" />
     <ClCompile Include="GUI\Hud.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -149,7 +150,9 @@
     <ClInclude Include="ChunkManager.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GUI\HealthBar.h" />
     <ClInclude Include="GUI\Hud.h" />
+    <ClInclude Include="GUI\HudElement.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tiles\Air.h" />
     <ClInclude Include="Tiles\CoalOre.h" />

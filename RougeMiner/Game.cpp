@@ -27,6 +27,7 @@ void Game::EventHandler(sf::Event& event) {
 void Game::Tick() {
 	player.keyPressed(Game::deltaTime);
 	Camera::Tick();
+	Hud::Update();
 }
 
 void Game::Draw(sf::RenderWindow& window) {
@@ -53,8 +54,7 @@ void Game::Draw(sf::RenderWindow& window) {
 	player.TileLook(window);
 	player.draw(window);
 	
-
-	Hud::Draw(window, player.getPos());
+	Hud::Draw(window);
 	deltaTime = DeltaClock.restart();
 }
 
