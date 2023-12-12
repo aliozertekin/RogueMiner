@@ -127,5 +127,20 @@
     <Image Include="Assets\tilesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Assets\tiles\tin_ore.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\tiles\coal_ore.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\tiles\cobblestone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\tiles\copper_ore.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\tiles\stone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

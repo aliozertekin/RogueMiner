@@ -105,6 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -168,6 +169,11 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\tiles\coal_ore.png" />
+    <Image Include="Assets\tiles\cobblestone.png" />
+    <Image Include="Assets\tiles\copper_ore.png" />
+    <Image Include="Assets\tiles\stone.png" />
+    <Image Include="Assets\tiles\tin_ore.png" />
     <Image Include="Assets\Player.png" />
     <Image Include="Assets\tilesheet.png" />
   </ItemGroup>

@@ -20,7 +20,6 @@ Tile::Tile(TileBase* type, int x, int y, Chunk* chunk, sf::Texture* texture)
 
 void Tile::Draw(sf::RenderWindow& window)
 {
-	//window.draw(sprite);
 	type->Draw(window, sprite);
 }
 

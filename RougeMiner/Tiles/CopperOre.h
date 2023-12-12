@@ -4,7 +4,7 @@
 class CopperOre : public TileBase {
 public:
     CopperOre() {
-        textureRect = sf::IntRect(32, 32, 32, 32);
+        textureID = "copper_ore";
         ID = "RM_COPPER_ORE";
         Name = "CopperOre";
         Description = "Soft, malleable, and ductile metal with very high thermal and electrical conductivity.";

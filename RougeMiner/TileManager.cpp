@@ -23,6 +23,10 @@ void TileManager::RegisterTiles()
 
 void TileManager::RegisterTile(std::string uniqueKey, TileBase base)
 {
+    if (!base.textureID.empty()) {
+        base.textureRect = TextureManager::GetTextureRect(base.textureID);
+    }
+
     tileRegistry[uniqueKey] = base;
 }
 

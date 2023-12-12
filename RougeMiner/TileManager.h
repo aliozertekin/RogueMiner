@@ -7,6 +7,7 @@
 #include "Tiles/TileBase.h"
 #include "Utils.h"
 #include "Types/OreDefinition.h"
+#include "TextureManager.h"
 
 static std::vector<std::string> ores;
 

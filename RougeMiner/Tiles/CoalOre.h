@@ -4,7 +4,7 @@
 class CoalOre : public TileBase {
 public:
     CoalOre() {
-        textureRect = sf::IntRect(96, 32, 32, 32);
+        textureID = "coal_ore";
         ID = "RM_COAL_ORE";
         Name = "CoalOre";
         Description = "A hard rock which can be burned as a fossil fuel.";

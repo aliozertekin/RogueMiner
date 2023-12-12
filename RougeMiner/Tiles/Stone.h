@@ -4,7 +4,7 @@
 class Stone : public TileBase {
 public:
     Stone() {
-        textureRect = sf::IntRect(0, 0, 32, 32);
+        textureID = "stone";
         ID = "RM_STONE";
         Name = "Stone";
         Description = "A hard stone.";

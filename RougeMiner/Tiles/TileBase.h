@@ -6,6 +6,7 @@ public:
 	virtual void Draw(sf::RenderWindow&, sf::Sprite&);
 
 	sf::IntRect textureRect;
+	std::string textureID;
 	std::string ID;
 	std::string Name;
 	std::string Description;
