@@ -6,7 +6,6 @@ using namespace sf;
 int main() {
     clock_t tStart = clock();
     RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "RogueMiner");
-    
     Game::InitGame();
     Player player = Game::GetPlayer();
     
@@ -15,7 +14,7 @@ int main() {
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed)
+            if (event.type == Event::Closed || event.type == sf::Keyboard::Escape)
                 window.close();
 
             Game::EventHandler(event);

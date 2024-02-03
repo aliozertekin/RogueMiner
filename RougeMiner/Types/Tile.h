@@ -15,7 +15,7 @@ public:
 	void SetType(TileBase* type);
 	TileBase* GetType();
 	sf::Sprite getSprite();
-	void setSprite();
+	void setSprite(sf::Sprite);
 private:
 	TileBase* type;
 	Chunk* chunk;

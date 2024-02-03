@@ -1,42 +1,90 @@
 #include "Player.h"
+
 #include <math.h>
 #include <iostream>
 
+int Player::playerState;
+sf::Texture Player::playerSheet;
+sf::Sprite Player::playerSprite;
+int Player::playerFrame;
+int Player::playerDirection;
+int Player::shownFPS;
+sf::Clock Player::spriteClock;
+sf::Time Player::spriteTime;
+Tile* Player::targetTile;
+Chunk* Player::targetChunk;
+
+
 Player::Player() {
+	
+
 	playerSprite.setOrigin(SPRITE_WIDTH / 2, SPRITE_HEIGHT / 2);
-	playerSprite.setPosition(0,0);
+	playerSprite.setPosition(0, 0);
 }
 
-Tile* Player::TileLook(sf::RenderWindow& window)
+void Player::TileLook()
 {
 	sf::Vector2f playerPos = playerSprite.getPosition();
-	Chunk* chunk = ChunkManager::getChunkWorld(floor(playerPos.x),floor(playerPos.y));
-	sf::Vector2f tilePos = sf::Vector2f(floor(playerPos.x / 32.0f), floor(playerPos.y / 32.0f));
+	Chunk* chunk = ChunkManager::getChunkWorld(playerPos);
+	sf::Vector2i chunkPos = chunk->getChunkPos();
 	
+	
+	sf::Vector2i tilePos = sf::Vector2i( floor(playerPos.x / 32.0f) , floor(playerPos.y / 32.0f));
+	tilePos = sf::Vector2i(tilePos.x % 16, tilePos.y % 16);
+	if (tilePos.x < 0) tilePos.x += 16;
+	if (tilePos.y < 0) tilePos.y += 16;
+
 	switch (playerDirection){
 		case playerDirections::Down:{
-			targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y + 1);
+			if (tilePos.y == 15){
+				targetChunk = ChunkManager::getChunk(chunkPos.x, chunkPos.y + 1);
+				targetTile = targetChunk->getTileAt(tilePos.x, 0);
+				
+			}
+			else 
+			{
+				targetChunk = chunk;
+				targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y + 1);
+			}
 			break;
 		}
 		case playerDirections::Left:{
-			targetTile = ChunkManager::getTileAt(tilePos.x - 1, tilePos.y);
+			if (tilePos.x == 0) {
+				targetChunk = ChunkManager::getChunk(chunkPos.x - 1, chunkPos.y);
+				targetTile = targetChunk->getTileAt(15, tilePos.y);
+			}
+			else 
+			{
+				targetChunk = chunk;
+				targetTile = ChunkManager::getTileAt(tilePos.x - 1, tilePos.y);
+			}
 			break;
 		}
 		case playerDirections::Right:{
-			targetTile = ChunkManager::getTileAt(tilePos.x + 1, tilePos.y);
+			if (tilePos.x == 15) {
+				targetChunk = ChunkManager::getChunk(chunkPos.x + 1, chunkPos.y);
+				targetTile = targetChunk->getTileAt(0, tilePos.y);
+			}
+			else 
+			{
+				targetChunk = chunk;
+				targetTile = ChunkManager::getTileAt(tilePos.x + 1, tilePos.y);
+			}
 			break;
 		}
 		case playerDirections::Up:{
-			targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y - 1);
+			if (tilePos.y == 0) {
+				targetChunk = ChunkManager::getChunk(chunkPos.x, chunkPos.y - 1);
+				targetTile = targetChunk->getTileAt(tilePos.x, 15);
+			}
+			else 
+			{
+				targetChunk = chunk;
+				targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y - 1);
+			}
 			break;
 		}
-		default:{
-			targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y);
-			break; 
-		}
 	}
-	
-	return NULL;
 }
 
 void Player::SetTexture(sf::Texture texture)
@@ -56,30 +104,25 @@ void Player::draw(sf::RenderWindow& window)
 	window.draw(playerSprite);
 }
 
-void Player::playerAnimation()
+
+
+std::unique_ptr<Player> Player::createPlayer(ClassBase base)
 {
-	switch (playerState) {
-		case playerStates::Idle: 
-		{
-
-			playerFrame = 0;
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
-			break;
-		}
-		case playerStates::Running: {
-			
-			if (playerFrame > 3) { playerFrame = 0; spriteClock.restart(); }
-			playerSprite.setTextureRect(sf::IntRect(playerFrame * SPRITE_WIDTH, playerDirection * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
-			break;
-
-		}
-	}
-	spriteTime = spriteClock.getElapsedTime();
-	playerFrame = floor(spriteTime.asSeconds() * shownFPS);
+	std::unique_ptr<Player> p(new Player);
+	p->health = base.Health;
+	p->stamina = base.Stamina;
+	return p;
 }
 
+Chunk* Player::getChunkLookedAt()
+{
+	return targetChunk;
+}
 
-
+Tile* Player::getTileLookedAt()
+{
+	return targetTile;
+}
 
 void Player::keyPressed(sf::Time deltaTime) {
 

@@ -1,16 +1,18 @@
 #pragma once
+#include <SFML/System/Vector2.hpp>
+#include "Types/OreDefinition.h"
 #include <iomanip>
 #include <iostream>
 #include <map>
-#include <random>
 #include <numeric>
-#include "Types/OreDefinition.h"
+#include <random>
 
 class Utils {
 public:
+	
 	static float lerp(float a, float b, float f);
 	static int largest(int arr[], int n);
-
+	static sf::Vector2f aspectRatio();
 	static void SetSeed(int seed);
 	// Get random integer from a range (seed independent)
 	static int GetRandomRange(int min, int max);

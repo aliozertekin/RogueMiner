@@ -1,5 +1,6 @@
 #include "Tile.h"
 #include "Chunk.h"
+#include "..//AnimationManager.h"
 
 Tile::Tile()
 {
@@ -25,6 +26,8 @@ void Tile::Draw(sf::RenderWindow& window)
 
 sf::Vector2i Tile::GetPos()
 {
+	if (this == nullptr)
+		return sf::Vector2i(0, 0);
 	return sf::Vector2i(tileX, tileY);
 }
 
@@ -42,3 +45,9 @@ sf::Sprite Tile::getSprite()
 {
 	return sprite;
 }
+
+void Tile::setSprite(sf::Sprite sp)
+{
+	sprite = sp;
+}
+

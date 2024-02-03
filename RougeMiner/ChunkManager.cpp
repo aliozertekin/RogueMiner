@@ -51,6 +51,13 @@ Chunk* ChunkManager::getChunk(int x, int y)
 	return nullptr;
 }
 
+Chunk* ChunkManager::getChunkWorld(sf::Vector2f pos)
+{
+	int chunkX = static_cast<int>(floor(pos.x / 512.0f));
+	int chunkY = static_cast<int>(floor(pos.y / 512.0f));
+	return getChunk(chunkX, chunkY);
+}
+
 Chunk* ChunkManager::getChunkWorld(float x, float y)
 {
 	int chunkX = static_cast<int>(floor(x / 512.0f));
@@ -77,6 +84,16 @@ Tile* ChunkManager::getTileAt(int x, int y)
 void ChunkManager::setTileSheet(sf::Texture texture)
 {
 	tileSheet = texture;
+}
+
+Tile* ChunkManager::worldToTileCoordinates(sf::Vector2f world)
+{
+	return getChunkWorld(world)->getTileAt(((int)world.x%512)/32, ((int)world.y % 512) / 32);
+
+
+	
+	
+		
 }
 
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()

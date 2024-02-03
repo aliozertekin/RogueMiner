@@ -1,3 +1,4 @@
+#include "Entities/Classes/ClassManager.h"
 #include "Game.h"
 #include <map>
 #define DEBUG true
@@ -9,10 +10,13 @@ sf::View Game::gameView;
 
 void Game::InitGame()
 {
-	Utils::SetSeed(31);
+	AnimationManager::Initialize();
+	player.createPlayer(Barbarian());
+	Utils::SetSeed(34634634);
 	TextureManager::LoadTextures();
-	player.SetTexture(TextureManager::playerTexture);
 	Camera::setViews(&gameView, Hud::getView());
+	player.SetTexture(TextureManager::playerTexture);
+
 	TileManager::RegisterTiles();
 	ChunkManager::setTileSheet(TextureManager::tileTexture);
 	ChunkManager::InitChunks();
@@ -22,17 +26,21 @@ void Game::InitGame()
 
 void Game::EventHandler(sf::Event& event) {
 	Camera::keyPressed(event, Game::deltaTime);
+
+	
 }
 
 void Game::Tick() {
 	player.keyPressed(Game::deltaTime);
+
 	Camera::Tick();
 	Hud::Update();
+	
 }
 
 void Game::Draw(sf::RenderWindow& window) {
 	DrawView(window);
-	player.playerAnimation();
+	AnimationManager::Animate();
 
 	std::unordered_map<int, std::unordered_map<int, Chunk>>* chunks = ChunkManager::getChunks();
 
@@ -51,10 +59,22 @@ void Game::Draw(sf::RenderWindow& window) {
 		}
 	}
 
-	player.TileLook(window);
-	player.draw(window);
 	
+
+	player.draw(window);
+
+	player.TileLook();
+	sf::Sprite selector = AnimationManager::getSelectorSprite();
+	selector.setPosition(player.getChunkLookedAt()->tileToWorldCoordinates(player.getTileLookedAt()->GetPos()));
+	AnimationManager::setSelectorSprite(selector);
+
+
+	window.draw(AnimationManager::getSelectorSprite());
+
 	Hud::Draw(window);
+	
+
+	
 	deltaTime = DeltaClock.restart();
 }
 

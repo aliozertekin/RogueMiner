@@ -31,6 +31,16 @@ void Chunk::DebugDraw(sf::RenderWindow& window) {
     window.draw(debugShape);
 }
 
+sf::Vector2i Chunk::getChunkPos(Chunk* chunk)
+{
+    return sf::Vector2i(chunk->posX, chunk->posY);
+}
+
+sf::Vector2i Chunk::getChunkPos()
+{
+    return sf::Vector2i(this->posX, this->posY);
+}
+
 Tile* Chunk::getTileAt(int x, int y) {
     if (x < 0) x += 16;
     if (y < 0) y += 16;
@@ -58,3 +68,22 @@ sf::Vector2f Chunk::tileToWorldCoordinates(int x, int y)
     float yPosition = (posY * 512.0) + y * 32.0;
     return sf::Vector2f(xPosition, yPosition);
 }
+
+sf::Vector2f Chunk::tileToWorldCoordinates(sf::Vector2f pos)
+{
+    float xPosition = (posX * 512.0) + pos.x * 32.0;
+    float yPosition = (posY * 512.0) + pos.y * 32.0;
+    return sf::Vector2f(xPosition, yPosition);
+
+
+}
+
+sf::Vector2f Chunk::tileToWorldCoordinates(sf::Vector2i pos)
+{
+    float xPosition = (posX * 512.0) + pos.x * 32.0;
+    float yPosition = (posY * 512.0) + pos.y * 32.0;
+    return sf::Vector2f(xPosition, yPosition);
+}
+
+
+

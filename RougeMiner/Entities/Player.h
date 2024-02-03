@@ -1,18 +1,21 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Classes/ClassManager.h"
 #include "../ChunkManager.h"
 
 constexpr auto SPRITE_WIDTH = 48;
 constexpr auto SPRITE_HEIGHT = 48;
-
+ 
 class Player {
-
 public:
 	Player();
-	Tile* TileLook(sf::RenderWindow& window);
+	void TileLook();
 	void SetTexture(sf::Texture texture);
 	void draw(sf::RenderWindow&);
-	void playerAnimation();
+	static std::unique_ptr<Player> createPlayer(ClassBase base);
+
+	Chunk* getChunkLookedAt();
+	Tile* getTileLookedAt();
 
 	void keyPressed(sf::Time deltaTime);
 	sf::Vector2f getPos();
@@ -27,20 +30,32 @@ public:
 		Right,
 		Up
 	};
+	
+
+	static sf::Texture playerSheet;
+	static sf::Sprite playerSprite;
+
+	static int playerState;
+	static int playerFrame;
+	static int playerDirection;
+	static int shownFPS;
+	
+	
+
+	static sf::Clock spriteClock;
+	static sf::Time spriteTime;
+
 private:
-	int playerFrame = 0;
-	sf::Texture playerSheet;
-	sf::Sprite playerSprite;
-	int playerState = 0;
-	int playerDirection = 0;
-	int shownFPS = 8;
-	sf::Clock spriteClock;
-	sf::Time spriteTime;
+
 	sf::Vector2f playerSpeed = sf::Vector2f(xSpeed,ySpeed);
-	Tile* targetTile;
+
+	static Tile* targetTile;
+	static Chunk* targetChunk;
 
 	float xSpeed = 0.0f;
 	float ySpeed = 0.0f;
 	float movementSpeed = 80.0f;
 	float friction = 0.90f;
+	int health;
+	int stamina;
 };

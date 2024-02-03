@@ -2,14 +2,22 @@
 
 sf::Texture TextureManager::playerTexture;
 sf::Texture TextureManager::tileTexture;
+sf::Texture TextureManager::statusBarTexture;
+sf::Texture TextureManager::selectorTexture;
+
 std::map<std::string, sf::IntRect> TextureManager::textureRegistry;
 
 void TextureManager::LoadTextures()
 {
-	if (!playerTexture.loadFromFile("Assets/entities/player.png")) {
+	if (!playerTexture.loadFromFile("Assets/entities/player2.png")) {
 		std::cout << "Couldn't load file 'Player.png'!";
 	}
-
+    if (!statusBarTexture.loadFromFile("Assets/entities/statusBar.png")) {
+        std::cout << "Couldn't load file 'statusBar.png'!";
+    }
+    if (!selectorTexture.loadFromFile("Assets/entities/selector.png")) {
+        std::cout << "Couldn't load file 'selector.png'!";
+    }
     tileTexture = StitchTextures("Assets/tiles");
 }
 

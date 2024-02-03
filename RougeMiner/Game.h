@@ -1,14 +1,13 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "Entities/Player.h"
-#include "TextureManager.h"
-#include "GUI/Hud.h"
-#include "ChunkManager.h"
+#include "AnimationManager.h"
 #include "Camera.h"
+#include "ChunkManager.h"
+#include "Entities/Player.h"
+#include "GUI/Hud.h"
+#include "TextureManager.h"
 #include "TileManager.h"
+#include <SFML/Graphics.hpp>
 
-constexpr auto WINDOW_WIDTH = 800;
-constexpr auto WINDOW_HEIGHT = 600;
 
 class Game {
 public:

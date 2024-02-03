@@ -8,7 +8,7 @@ void Hud::Init(float windowW, float windowH)
 {
 	hudView.setSize(windowW, windowH);
 	hudView.setCenter(sf::Vector2f(0,0));
-	//AddElement("HealthBar", std::make_unique<HealthBar>(100));
+	AddElement("HealthBar", std::make_unique<HealthBar>(100));
 }
 
 void Hud::Draw(sf::RenderWindow& window)

@@ -2,10 +2,15 @@
 #include <iostream>
 #include "Utils.h"
 
+
 sf::View* Camera::gameView;
 sf::View* Camera::hudView;
 float Camera::zoomLevel;
-float Camera::zoomTarget;
+float Camera::zoomTarget; 
+float Camera::prevZoomLevel;
+sf::Vector2f Camera::gameViewSize;
+int Camera::wheelDelta;
+sf::Vector2f aspectRatio(static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT), 1);
 
 void Camera::setViews(sf::View* gameView, sf::View* hudView)
 {
@@ -17,25 +22,29 @@ void Camera::setViews(sf::View* gameView, sf::View* hudView)
 
 void Camera::Tick()
 {
-	float prevZoomLevel = zoomLevel;
-	zoomLevel = Utils::lerp(zoomLevel, zoomTarget, 0.1);
-	if(zoomLevel != 0) setZoomLevel((zoomLevel-prevZoomLevel)+1);
+	gameViewSize = gameView->getSize();
+	prevZoomLevel = zoomLevel;
+	zoomLevel = Utils::lerp(zoomLevel, zoomTarget, 0.1f);
+	Camera::setZoomLevel();
 }
-
-void Camera::setZoomLevel(float zoom)
+	
+void Camera::setZoomLevel()
 {
+	//std::cout << gameViewSize.x << "\n" << gameViewSize.y << "\n";
 	if (gameView == nullptr) return;
-	gameView->zoom(zoom);
+
+	gameView->setSize(gameViewSize.x + aspectRatio.x * 100 * (zoomLevel - prevZoomLevel), gameViewSize.y + aspectRatio.y * 100 * (zoomLevel - prevZoomLevel));
+	if (gameViewSize.x >= WINDOW_WIDTH || gameViewSize.y >= WINDOW_HEIGHT)
+		gameView->setSize(WINDOW_WIDTH - aspectRatio.x, WINDOW_HEIGHT - aspectRatio.y);
+	else if (gameViewSize.x <= WINDOW_WIDTH / 4 || gameViewSize.y <= WINDOW_HEIGHT / 4)
+		gameView->setSize(WINDOW_WIDTH / 4 + aspectRatio.x, WINDOW_HEIGHT / 4 + aspectRatio.y);
 }
 
 void Camera::keyPressed(sf::Event event, sf::Time deltaTime)
 {
 	if (event.type == sf::Event::MouseWheelMoved) {
-		int wheelDelta = event.mouseWheel.delta;
+		wheelDelta = event.mouseWheel.delta;
 		if (wheelDelta > 0)	zoomTarget -= 0.5;
 		else				zoomTarget += 0.5;
-
-		if (zoomTarget > 1.5) zoomTarget = 1.5;
-		if (zoomTarget < -1.5) zoomTarget = -1.5;
 	}
 }

@@ -57,6 +57,12 @@
     <ClCompile Include="GUI\HealthBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Classes\ClassBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -119,6 +125,21 @@
     <ClInclude Include="GUI\HealthBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\Classes\ClassBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Classes\Barbarian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Classes\Rogue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Classes\ClassManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Player.png">
@@ -140,6 +161,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assets\tiles\stone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\entities\statusBar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\entities\selector.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\entities\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\entities\player2.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
