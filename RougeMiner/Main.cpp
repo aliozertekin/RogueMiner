@@ -5,8 +5,8 @@ using namespace sf;
 
 int main() {
     clock_t tStart = clock();
-    RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "RogueMiner");
     Game::InitGame();
+    RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "RogueMiner");
     Player player = Game::GetPlayer();
     
     window.setFramerateLimit(144);
@@ -22,6 +22,7 @@ int main() {
 
         Game::Tick();
         window.clear(sf::Color::White);
+
         Game::Draw(window);
         window.display();
     }

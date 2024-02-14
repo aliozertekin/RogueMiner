@@ -13,6 +13,7 @@ Tile::Tile(TileBase* type, int x, int y, Chunk* chunk, sf::Texture* texture)
 	this->tileY = y;
 	this->type = type;
 
+
 	sf::Vector2f worldPos = chunk->tileToWorldCoordinates(x, y);
 	sprite.setPosition(worldPos);
 	sprite.setTexture(*texture);
@@ -21,7 +22,7 @@ Tile::Tile(TileBase* type, int x, int y, Chunk* chunk, sf::Texture* texture)
 
 void Tile::Draw(sf::RenderWindow& window)
 {
-	type->Draw(window, sprite);
+	this->type->Draw(window, this->sprite);
 }
 
 sf::Vector2i Tile::GetPos()
@@ -33,21 +34,21 @@ sf::Vector2i Tile::GetPos()
 
 void Tile::SetType(TileBase* tile)
 {
-	type = tile;
+	this->type = tile;
+	sprite.setTextureRect(type->textureRect);
 }
 
 TileBase* Tile::GetType()
 {
+	if (this == nullptr)
+		return TileManager::GetTile("NULL");
 	return type;
 }
 
-sf::Sprite Tile::getSprite()
+sf::Vector2f Tile::tileToWorld()
 {
-	return sprite;
+	return sf::Vector2f(this->chunk->getChunkPos().x * 512 + this->tileX * 32, this->chunk->getChunkPos().y * 512 + this->tileY * 32);
 }
 
-void Tile::setSprite(sf::Sprite sp)
-{
-	sprite = sp;
-}
+
 

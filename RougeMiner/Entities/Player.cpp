@@ -13,6 +13,9 @@ sf::Clock Player::spriteClock;
 sf::Time Player::spriteTime;
 Tile* Player::targetTile;
 Chunk* Player::targetChunk;
+Tile* Player::onTile;
+Chunk* Player::onChunk;
+Tile* Player::mouseTile;
 
 
 Player::Player() {
@@ -24,6 +27,9 @@ Player::Player() {
 
 void Player::TileLook()
 {
+
+	mouseTile = ChunkManager::worldToTileCoordinates((sf::Vector2f)(sf::Mouse::getPosition()));
+
 	sf::Vector2f playerPos = playerSprite.getPosition();
 	Chunk* chunk = ChunkManager::getChunkWorld(playerPos);
 	sf::Vector2i chunkPos = chunk->getChunkPos();
@@ -33,6 +39,8 @@ void Player::TileLook()
 	tilePos = sf::Vector2i(tilePos.x % 16, tilePos.y % 16);
 	if (tilePos.x < 0) tilePos.x += 16;
 	if (tilePos.y < 0) tilePos.y += 16;
+	onTile = chunk->getTileAt(tilePos);
+	onChunk = chunk;
 
 	switch (playerDirection){
 		case playerDirections::Down:{
@@ -44,7 +52,7 @@ void Player::TileLook()
 			else 
 			{
 				targetChunk = chunk;
-				targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y + 1);
+				targetTile = targetChunk->getTileAt(tilePos.x, tilePos.y + 1);
 			}
 			break;
 		}
@@ -56,7 +64,7 @@ void Player::TileLook()
 			else 
 			{
 				targetChunk = chunk;
-				targetTile = ChunkManager::getTileAt(tilePos.x - 1, tilePos.y);
+				targetTile = targetChunk->getTileAt(tilePos.x - 1, tilePos.y);
 			}
 			break;
 		}
@@ -68,7 +76,7 @@ void Player::TileLook()
 			else 
 			{
 				targetChunk = chunk;
-				targetTile = ChunkManager::getTileAt(tilePos.x + 1, tilePos.y);
+				targetTile = targetChunk->getTileAt(tilePos.x + 1, tilePos.y);
 			}
 			break;
 		}
@@ -80,7 +88,7 @@ void Player::TileLook()
 			else 
 			{
 				targetChunk = chunk;
-				targetTile = ChunkManager::getTileAt(tilePos.x, tilePos.y - 1);
+				targetTile = targetChunk->getTileAt(tilePos.x, tilePos.y - 1);
 			}
 			break;
 		}
@@ -114,6 +122,20 @@ std::unique_ptr<Player> Player::createPlayer(ClassBase base)
 	return p;
 }
 
+void Player::breakTile()
+{
+	if (targetTile->GetType() == TileManager::GetTile("NULL")) return;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		targetTile->SetType(TileManager::GetTile("NULL"));
+}
+
+void Player::placeBlock()
+{
+	if (targetTile->GetType() == TileManager::GetTile("RM_STONE")) return;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		targetTile->SetType(TileManager::GetTile("RM_STONE"));
+}
+
 Chunk* Player::getChunkLookedAt()
 {
 	return targetChunk;
@@ -122,6 +144,26 @@ Chunk* Player::getChunkLookedAt()
 Tile* Player::getTileLookedAt()
 {
 	return targetTile;
+}
+
+Chunk* Player::getOnChunk()
+{
+	return onChunk;
+}
+
+Tile* Player::getOnTile()
+{
+	return onTile;
+}
+
+Chunk* Player::getMouseChunk()
+{
+	return ChunkManager::getChunkWorld((sf::Vector2f)(sf::Mouse::getPosition()));
+}
+
+Tile* Player::getMouseTile()
+{
+	return mouseTile;
 }
 
 void Player::keyPressed(sf::Time deltaTime) {

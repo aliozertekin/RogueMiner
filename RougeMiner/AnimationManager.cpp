@@ -6,9 +6,9 @@ int AnimationManager::selectorFrame;
 
 void AnimationManager::Animate()
 {
-
 	playerAnimation();
 	selectorAnimation();
+	
 }
 
 void AnimationManager::Initialize()

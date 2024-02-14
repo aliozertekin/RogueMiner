@@ -48,16 +48,24 @@ Tile* Chunk::getTileAt(int x, int y) {
     return &tiles[x][y];
 }
 
+Tile* Chunk::getTileAt(sf::Vector2i pos)
+{
+    if (pos.x < 0) pos.x = abs(pos.x + 15);
+    if (pos.y < 0) pos.y = abs(pos.y + 15);
+
+    return &tiles[pos.x][pos.y];
+}
+
 void Chunk::setTileAt(int x, int y, TileBase* tile) {
-    if (x < 0) x += 16;
-    if (y < 0) y += 16;
+    if (x < 0) x = abs(x + 15);
+    if (y < 0) y = abs(y + 15);
 
     tiles[x][y].SetType(tile);
 }
 
 void Chunk::setTileAt(int x, int y, Tile tile) {
-    if (x < 0) x += 16;
-    if (y < 0) y += 16;
+    if (x < 0) x = abs(x + 15);
+    if (y < 0) y = abs(y + 15);
 
     tiles[x][y] = tile;
 }
@@ -74,8 +82,6 @@ sf::Vector2f Chunk::tileToWorldCoordinates(sf::Vector2f pos)
     float xPosition = (posX * 512.0) + pos.x * 32.0;
     float yPosition = (posY * 512.0) + pos.y * 32.0;
     return sf::Vector2f(xPosition, yPosition);
-
-
 }
 
 sf::Vector2f Chunk::tileToWorldCoordinates(sf::Vector2i pos)

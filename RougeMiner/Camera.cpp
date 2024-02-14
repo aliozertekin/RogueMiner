@@ -8,8 +8,11 @@ sf::View* Camera::hudView;
 float Camera::zoomLevel;
 float Camera::zoomTarget; 
 float Camera::prevZoomLevel;
+float Camera::mouseRatio;
 sf::Vector2f Camera::gameViewSize;
 int Camera::wheelDelta;
+sf::Vector2f Camera::gameViewMousePos;
+sf::Vector2f Camera::worldPos;
 sf::Vector2f aspectRatio(static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT), 1);
 
 void Camera::setViews(sf::View* gameView, sf::View* hudView)
@@ -20,9 +23,14 @@ void Camera::setViews(sf::View* gameView, sf::View* hudView)
 	zoomTarget = 0.0;
 }
 
+sf::Vector2f Camera::getGameViewMousePos()
+{
+	return worldPos;
+}
+
 void Camera::Tick()
 {
-	gameViewSize = gameView->getSize();
+	gameViewSize = *&gameView->getSize();
 	prevZoomLevel = zoomLevel;
 	zoomLevel = Utils::lerp(zoomLevel, zoomTarget, 0.1f);
 	Camera::setZoomLevel();
@@ -47,4 +55,10 @@ void Camera::keyPressed(sf::Event event, sf::Time deltaTime)
 		if (wheelDelta > 0)	zoomTarget -= 0.5;
 		else				zoomTarget += 0.5;
 	}
+}
+
+void Camera::mapPixelToCoords(sf::RenderWindow& window)
+{
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+	worldPos = window.mapPixelToCoords(pixelPos,*gameView);
 }

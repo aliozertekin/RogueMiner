@@ -12,6 +12,7 @@ public:
 	sf::Vector2i getChunkPos();
 	// Gets the tile at given position
 	Tile* getTileAt(int x, int y);
+	Tile* getTileAt(sf::Vector2i);
 	// Sets the tile at given position
 	void setTileAt(int x, int y, TileBase* tile);
 	void setTileAt(int x, int y, Tile tile);

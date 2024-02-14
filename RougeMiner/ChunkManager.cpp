@@ -7,13 +7,19 @@ sf::Texture ChunkManager::tileSheet;
 
 //TO-DO Randomly generated world
 void ChunkManager::InitChunks() {
-	GenerateChunk(-1, -1);
-	GenerateChunk(-1, 0);
-	GenerateChunk(0, -1);
 	GenerateChunk(0, 0);
-	GenerateChunk(-2, -2);
-	GenerateChunk(-2, -1);
-	GenerateChunk(-1, -2);
+	GenerateChunk(0, 1);
+	GenerateChunk(0, -1);
+	GenerateChunk(1, 0);
+	GenerateChunk(-1, 0);
+	for (int i = 1; i < 3; i++) {
+		for (int j = 1; j < 3; j++) {
+			GenerateChunk(i, j);
+			GenerateChunk(-i, j);
+			GenerateChunk(i, -j);
+			GenerateChunk(-i, -j);
+		}
+	}
 }
 
 void ChunkManager::GenerateChunk(int xPos, int yPos)
@@ -88,12 +94,9 @@ void ChunkManager::setTileSheet(sf::Texture texture)
 
 Tile* ChunkManager::worldToTileCoordinates(sf::Vector2f world)
 {
-	return getChunkWorld(world)->getTileAt(((int)world.x%512)/32, ((int)world.y % 512) / 32);
-
-
-	
-	
-		
+	int tilex = floor((static_cast<int>(world.x) / 32) % 16);
+	int tiley = floor((static_cast<int>(world.y) / 32) % 16);
+	return getChunkWorld(world)->getTileAt(tilex, tiley);
 }
 
 std::unordered_map<int, std::unordered_map<int, Chunk>>* ChunkManager::getChunks()

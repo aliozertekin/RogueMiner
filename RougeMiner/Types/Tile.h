@@ -14,8 +14,8 @@ public:
 	sf::Vector2i GetPos();
 	void SetType(TileBase* type);
 	TileBase* GetType();
-	sf::Sprite getSprite();
-	void setSprite(sf::Sprite);
+	sf::Vector2f tileToWorld();
+
 private:
 	TileBase* type;
 	Chunk* chunk;
